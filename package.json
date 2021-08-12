@@ -1,0 +1,12 @@
+{
+  "name": "js-questions",
+  "version": "1.0.0",
+  "description": "js 面试题准备",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
