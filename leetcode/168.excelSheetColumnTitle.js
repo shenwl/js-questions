@@ -24,12 +24,18 @@ function convertToTitle(columnNumber) {
   let carry = columnNumber;
 
   while (carry > 26) {
-    result.unshift(numToLetter(carry % 26));
-    carry = parseInt(carry / 26, 10)
+    if (carry % 26 === 0) {
+      result.unshift(numToLetter(26));
+      carry = parseInt((carry - 26) / 26, 10)
+    } else {
+      result.unshift(numToLetter(carry % 26));
+      carry = parseInt(carry / 26, 10);
+    }
   }
   if (carry > 0) {
     result.unshift(numToLetter(carry));
   }
+  console.log(result.join(''))
   return result.join('');
 };
 
@@ -39,4 +45,5 @@ function convertToTitle(columnNumber) {
   console.log(convertToTitle(1) === 'A');
   console.log(convertToTitle(27) === 'AA');
   console.log(convertToTitle(701) === 'ZY');
+  console.log(convertToTitle(52) === 'AZ');
 })();
