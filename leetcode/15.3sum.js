@@ -52,7 +52,8 @@
 var threeSum = function (nums) {
   if (nums.length < 2) return [];
 
-  const sortedNums = [...nums].sort();
+  // 不传入a, b，sort之后[-1, -4, 1]排列
+  const sortedNums = [...nums].sort((a, b) => a - b);
 
   const ans = [];
   for (let i = 0; i < sortedNums.length - 2; i++) {
@@ -66,21 +67,19 @@ var threeSum = function (nums) {
     // 找到left + right + target === 0;
     while (left < right) {
       const sum = sortedNums[left] + sortedNums[right] + target;
-      if (sum > 0) {
-        right--;
-
-        while (sortedNums[right - 1] === sortedNums[right]) right--;
-      } else if (sum < 0) {
-        left++;
-
-        while (sortedNums[left + 1] === sortedNums[left]) left++;
-      } else {
+      if (sum === 0) {
         ans.push([target, sortedNums[left], sortedNums[right]]);
         left++;
         right--;
 
-        while (sortedNums[left + 1] === sortedNums[left]) left++;
-        while (sortedNums[right - 1] === sortedNums[right]) right--;
+        while (left < right && sortedNums[left] === sortedNums[left - 1]) left++;
+        while (left < right && sortedNums[right] === sortedNums[right + 1]) right--;
+      } else if (sum > 0) {
+        right--;
+        while (left < right && sortedNums[right] === sortedNums[right + 1]) right--;
+      } else {
+        left++;
+        while (left < right && sortedNums[left] === sortedNums[left - 1]) left++;
       }
     }
 
@@ -88,5 +87,7 @@ var threeSum = function (nums) {
   return ans;
 };
 
-console.log(threeSum([-1, 0, 1, 2, -1, -4])) // [[-1,-1,2],[-1,0,1]]
-console.log(threeSum([0, 0, 0])) // [[0,0,0]]
+// console.log(threeSum([-1, 0, 1, 2, -1, -4])) // [[-1,-1,2],[-1,0,1]]
+// console.log(threeSum([0, 0, 0])) // [[0,0,0]]
+// console.log(threeSum([-2, 0, 1, 1, 2])) 
+console.log(threeSum([-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4])) // [[-4,0,4],[-4,1,3],[-3,-1,4],[-3,0,3],[-3,1,2],[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]]
