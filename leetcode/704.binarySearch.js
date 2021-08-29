@@ -3,7 +3,6 @@ var binarySearch = function (nums, target) {
 
   while (r > l) {
     let mid = Math.floor((l + r) / 2);
-    console.log(l, mid, r)
 
     if (target === nums[mid]) {
       return mid;
