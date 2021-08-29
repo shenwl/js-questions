@@ -16,6 +16,7 @@ export const reactivities = new Map<ReactiveTarget | ReactiveProxy, ReactiveProx
 
 /**
  * reactive的ReactiveTarget和effect使用usedReactivities交互
+ * 记录被访问过的[target, key]
  * 调用effect时清空，reactive Proxy对应target set时加入
  */
 export let usedReactivities: ReactiveSet[] = [];
